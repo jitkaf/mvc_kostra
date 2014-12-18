@@ -1,0 +1,69 @@
+{% extends "default.twig" %}
+{% block title %}me stoly{% endblock %}
+
+{% block content %}
+
+    {% if novy == false%}
+        <a href="index.php?page=stoly&action=novy"> Novy stul</a>
+        <h3> Me stoly</h3>
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <td><h4> Id stolu</h4></td>
+                    <td><h4>poctet osob</h4></td>
+                    <td><h4>Celkova utrata</h4></td>
+                    <td><h4>akce</h4></td>
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for stul in stoly%}
+                    <tr>
+                        <td>{{stul.id_stul}}</td>
+                        <td>{{stul.pocet_osob}}</td>
+                        <td>664</td>
+                        <td>
+                            <a href="index.php?page=stoly&smazat={{stul.id_stul}}">Smazat</a>
+                         </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+
+        </table>
+    {% else  %}
+
+        <form class="col-md-15" action="" method="post">
+
+            <select name="id_stul">
+                {% for stul in stolecky %}
+                    <option value="{{stul.id_stul}}">Stul č.{{stul.id_stul}} - Počet osob: {{stul.pocet_osob}}</option>
+                {% endfor %}
+            </select>
+            <input class="btn btn-success btn-block" type="submit" name="newstul" value="Přidat stůl">
+        </form>
+    {% endif %}
+    <h2> Nápověda</h2>
+    <p>
+        Nacházíte se v modu pro editaci stolů - tedy stolů, které máte na starost, které obsluhujete. Tato sekce je přístupná pro každého přihlášeného uživatele.
+        Každému číšníkovi se zde zobrazí jeho přiřazené stoly.
+    </p>
+
+    <h3>Přidat nový stůl</h3>
+    <p> 
+        Pro přidání stolu, do seznamu těch, které obsluhujete vyplňte údaje o příslušeném stolu a stiskněte tlačítko "Přidat stůl".
+    </p>
+
+    <h3> Editace stolu</h3>
+    <p> 
+        Pokud chcete informace o daném stolu upravit,rozklikněte udkaz "upravit" na stejném řádku
+        na kterém jsou napsané informace o tomto stolu.
+    </p>
+
+    <h3> Smazání stolu</h3>
+    <p> 
+        Pokud chcete stůl odstranit z databáze, klikněte na poličku "Smazat" na stejném řádku, na kterém jsou napsané informace o tomto stolu.
+        Pozor, tato změna je nevratná. Využívejte této funkce proto jen, pokud chcete stůl opravdu odstranit. V případě nechtěného smazáná
+        máte jeidnou možnost, přidat stůl znovu. Všechna neuložená data budou ale ztracena.
+    </p>
+{% endblock %}

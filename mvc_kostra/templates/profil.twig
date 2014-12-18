@@ -1,0 +1,28 @@
+{% extends "default.twig" %}
+{% block title %}Profil{% endblock %}
+{% block content %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+        <h4>Moje ID : {{profil.id_cisnik}}</h4></tr>
+                
+                
+      <tr><h4>Jmeno: {{profil.cisnik_jmeno}} </h4></tr>
+                
+    <tr><h4>Prijmeni: {{profil.cisnik_prijmeni}}</h4></tr>
+                
+<tr><h4>Datum nastupu: {{profil.cisnik_datum_nastupu|date('d.m.Y')}}</h4></tr>
+                
+<tr><h4>Platová třída:{{profil.cisnik_vykonnostni_trida}}</h4></tr>
+                
+            </tr>
+        
+    </table>
+<div class="profil">
+    <h3> Info </h3>
+    <p> V této sekci se nachází infromace o Vás. Pokud se zde vyskytnou nějaké nesrovnalosti, kontaktujte
+    prosím administrátora - Vašeho zaměstnavatele. Administrátor má jako jediný práco editovt tyto položky</p>
+    
+</div>
+{% endblock %}

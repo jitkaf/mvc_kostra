@@ -1,0 +1,105 @@
+{# empty Twig template #}
+{% extends "default.twig" %}
+
+{% block title %}Menu{% endblock %}
+{% block content %}
+
+
+    {% if upravit %}
+
+        <form class="col-md-10" action="index.php" method="post">
+            <input type="hidden" name="cis[id_cis]" value="{{cisnak.id_cisnik}}"> 
+            <label for="cis[login]" class="control-label">Přihlašovací jmené</label>
+            <input value="{{cisnak.login}}" class="form-control" type="text" name="cis[login]">
+
+            <label for="cis[cisnik_jmeno]" class="control-label">Jméno</label>
+            <input value="{{cisnak.cisnik_jmeno}}"class="form-control" type="text" name="cis[cisnik_jmeno]">
+
+            <label for="cis[cisnik_prijmeni]" class="control-label">Prijmeni</label>
+            <input value="{{cisnak.cisnik_prijmeni}}"class="form-control" type="text" name="cis[cisnik_prijmeni]">
+
+            {#            {% if cisnak  null %}#}
+            <label for="cis[cisnik_datum_nastupu]" class="control-label">Datum</label>
+            <input value="{{cisnak.cisnik_datum_nastupu}}"class="form-control" type="date" name="cis[cisnik_datum_nastupu]">
+            {#            {% endif %}#}
+
+            <label for="cis[heslo]" class="control-label">Heslo</label>
+            <input class="form-control" type="password" name="cis[heslo]">
+
+            <label for="cis[cisnik_vykonnostni_trida]" class="control-label">Vykonoatni trida</label>
+            <input value="{{cisnak.cisnik_vykonnostni_trida}}" class="form-control" type="number" name="cis[cisnik_vykonnostni_trida]">
+
+            {% if upravit %}
+                <input class="btn btn-success btn-block" type="submit" name="editci" value="Uprav cisnika">
+
+
+
+            {% endif%}
+        {% endif%}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>.
+                    <td><h4>menu</h4></td>
+                    <td><h4>cena</h4></td>
+                    <td><h4>složení</h4></td>
+                    <td><h4>upravit</h4></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for jidl in jidlo%}
+                    <tr>
+                        <td>{{jidl.nazev_polozky}} </td>
+                        <td>{{jidl.cena_menu}}</td>
+                        <td>{{jidl.slozeni}}<td>
+                        <td>
+                            {% if cisnik.prava !=null%}
+                                <a href="index.php?page=menu&smazatmenu={{jidl.id_menu}}">Smazat</a>
+                                <a href="index.php?page=menu&upravitmenu={{jidl.id_menu}}">Upravit</a>
+                            {%endif%}
+                        </td>
+
+                    </tr>                
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Nova polozka do menu</h3>
+        <form method="post" action="index.php">
+            nazev:<input value='{{menuuprava.nazev_polozky}}'  name="mn[nazev_polozky]" type="text">
+            slozeni:<input value='{{menuuprava.slozeni}}' name="mn[slozeni]" type="text">
+            cena:<input value='{{menuuprava.cena_menu}}' name="mn[cena_menu]" type="number">
+            {% if menuuprava is not null %}
+                <input name="mn[id_menu]" type='hidden' value='{{menuuprava.id_menu}}'>
+                <input type="submit" name="updtm">
+            {% else %}
+                <input type="submit" name="subm">
+
+            {% endif%}
+        </form>
+        <div class="menupopis">
+            <h2> Nápověda</h2>
+            <p>
+                Nacházíte se v modu pro editaci položek menu - jidelníčku vaší restaurace. Tato sekce je přístupná jen Vám, administrátorovi.
+            </p>
+
+            <h3>Vytvoření nové položky </h3>
+            <p> 
+                Pro zaregistrování nového pokrmu klikněte na položku "Přidat položku" a vyplňte povinné údaje o položce.
+            </p>
+
+            <h3> Editace položky</h3>
+            <p> 
+                Pokud chcete informace o dané pložce upravit, například zvášit její cenu pro zákazníka, rozklikněte udkaz "upravit" na stejném řádku
+                na kterém jsou napsané informace o této položce.
+            </p>
+
+            <h3> Smazání číšníka</h3>
+            <p> 
+                Pokud chcete položku odstranit z databáze, klikněte na poličku "Smazat" na stejném řádku, na kterém jsou napsané informace o pložce.
+                Pozor, tato změna je nevratná. Využívejte této funkce proto jen, pokud jste položku opravdu rzhodnuti zrušit. V případě nechtěného smazáná
+                máte jeidnou možnost, přidat položku znovu. Všechna neuložená data budou ale ztracena.
+            </p>
+
+        </div>
+    {% endblock %}

@@ -1,0 +1,39 @@
+{% extends "default.twig" %}
+{% block title %}Uzivatele{% endblock %}
+{% block content %}
+    <h1> Přehled všech zaměstnanců </h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td><h4>ID</h4></td>
+                <td><h4>jmeno</h4></td>
+                <td><h4>prijmeni</h4></td>
+                <td><h4>Datum registrace</h4></td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for uzivatel in uzivatele%}
+                <tr>
+                    <td>{{uzivatel.id_cisnik}}</td>
+                    <td>{{uzivatel.cisnik_jmeno}}</td>
+                    <td>{{uzivatel.cisnik_prijmeni}}</td>
+                    <td>{{uzivatel.cisnik_datum_nastupu|date('d.m.Y h:m:s')}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<div class="zamestnanci">
+    <h2> Info </h2>
+    <p>
+Pokud chcete zaměstnance editovat přejděte prosím na záložku Cisnici, která se
+nachází v pravém menu. Tato stránka slouží pouze pro zobrazení vsech číšníků spolu 
+s jejich základními údaji.
+    </p>  
+    <p>
+Datum registrace číšníka odpovídá datu, které jste uvedli při jeho přidání
+do tabulky číšníků. Dle vašeho uvážení může tedy vyjdadřovat datum registrace do systému
+    či kdy nastoupil číšník do vaší restarace jako zaměstnanec.</p>
+
+</div>
+{% endblock %}

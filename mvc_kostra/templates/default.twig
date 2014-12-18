@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+
+
+        <!-- Bootstrap -->
+        <link href="libs/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        {#        Validator formularu v script.js ho aplikuji na nejaky formular a on overi, zdali jsou vyplnena pole #}
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
+        <script src="libs/Bootstrap/js/bootstrap.min.js"></script>
+        {#        Vlastní styl a javascript     #}
+        <link rel="stylesheet" type="text/css" href="public/css/style.css">
+        <script src="public/js/script.js"></script>
+
+    </head>
+    <body>
+        <div class="container">
+
+
+            <div class="page-header">
+                <h1><a href="index.php"> </a> <small class="righttext"><br></small></h1>
+            </div>
+
+
+            <div class="navigace">
+                <ul class="nav nav-pills" role="tablist">
+                    {#                    {{ user.login }}#}
+                    <li {% if page == "homepage" %}class="active"{%endif%}><a href="index.php">Domů</a>
+                    </li>
+                    <li {% if page == "jidelnicek" %}class="active"{%endif%}><a href="index.php?page=jidelnicek">Jídelníček</a>
+                    </li>
+
+                    {% if user is not null%}
+                        {# pokud uzivatel je prihlasen, tak se zobrazi tyto odkazy#}
+                       {% if user.prava == 1 %}
+                              
+                        <li {% if page == "cisnici" %}class="active"{%endif%}><a href="index.php?page=uzivatele">Seznam zaměstnanců</a>
+                        </li> 
+                        {% endif %}
+                        <li ><a href="index.php?logout">Odhlasit se</a>
+                        </li>                        
+                    {% endif %} 
+
+
+                </ul>
+            </div>
+
+            <div class="content col-md-8">
+                {% if hlaska != "" %}
+                    <div class="alert alert-info alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        {{hlaska}}
+                    </div>
+                {%endif%}
+            {% block content %}{% endblock %}
+        </div>
+        <div class="bocni-menu col-md-4">
+            <div class="login">
+
+                {% if user is null %}
+                    <form action="" id="omg" method="post" novalidate="novalidate">
+
+                        <div class="form-group">
+                            <label for="login[login]" class="control-label">Přihlašovací jméno</label>
+                            <input type="text" class="form-control" name="login[login]"  required title="Prosím vyplňte vaše přihlašovací jméno" placeholder="Uživatelské jméno">
+                            <span class="help-block"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="login[password]" class="control-label">Heslo</label>
+                            <input type="password" class="form-control" name="login[password]"  required title="Prosím vyplňte vaše přihlašovací jméno" placeholder="Uživatelské jméno">
+                            <span class="help-block"></span>
+                        </div>
+                        <input type="submit" name="log" value="Přihlásit" class="btn btn-success btn-block">
+                    </form>
+                {%else%}
+                    Prihlasen jako :{{user.login}} <a href="index.php?logout">Odhlasit!</a>
+
+                {% endif %}
+
+            </div><br>
+            <div class="clearfix"></div>
+            {% if user is not null%}
+
+                <div class="user-menu">
+                    <h3> Menu</h3>
+                    <ul class="nav nav-pills nav-stacked">
+                        {% if user.prava == 1%}
+                            <li {% if page == "cisnici" %}class="active"{%endif%}><a href="index.php?page=cisnici">Cisnici</a> </li>
+                            
+                            <li {% if page == "meni" %}class="active"{%endif%}><a href="index.php?page=menu">Editovat jidelnicek</a></li>
+
+                        {% endif %}
+                        <li {% if page == "stoly" %}class="active"{%endif%}><a href="index.php?page=stoly">Moje stoly</a></li>
+                        <li {% if page == "objednavky" %}class="active"{%endif%}><a href="index.php?page=objednavky">Moje objednavky</a></li>
+                        <li {% if page == "profil" %}class="active"{%endif%}><a href="index.php?page=profil">Profil</a></li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        <div class="clearfix">
+
+            <div class="col-lg-12" id="pata"> © 2014 Jitka Fürbacherová </div>
+
+        </div>
+</body>
+
+</html>

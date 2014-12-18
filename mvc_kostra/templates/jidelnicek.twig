@@ -1,0 +1,55 @@
+{# empty Twig template #}
+{% extends "default.twig" %}
+{% block title %}Jídelníček{% endblock %}
+{% block content %}
+    
+    <h3> Dnes Vám nabízíme </h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>.
+                <td><h4>menu</h4></td>
+                <td><h4>cena</h4></td>
+                <td><h4>složení</h4></td>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for jidl in jidlo%}
+                <tr>
+                    <td>{{jidl.nazev_polozky}} </td>
+                    <td>{{jidl.cena_menu}}</td>
+                    <td>{{jidl.slozeni}} 
+                 <td>
+                            {% if cisnik.prava !=null%}
+                            
+                                <a href="index.php?page=menu&smazat={{menu_jednotlive_polozky.id_menu}}">Smazat</a> - 
+                            
+                            <a href="index.php?page=menu&upravit={{menu_jednotlive_polozky.id_menu}}">Upravit
+                            </a></td>
+                            {%endif%}
+                            
+                    </tr>   
+                </tr>                
+            {% endfor %}
+        </tbody>
+    </table>
+
+        <div class="jidelnice_popis">
+            <p>
+     Ceny jsou uvedeny včetně DPH. 
+            </p>
+            
+            <h2>Původ surovin </h2>
+            <p>
+     Veškeré suroviny pochází z výhradně českých zdrojů. Většinu zeleniny i masa produkujeme sami. 
+     Lahodné pokrmy pro Vás chystá hlavní kuchař Milan Hrubý a jeho pomcníci Alena Nováková a Petr Bílek.
+            </p>
+            
+            <h2>Kontakt na zodpovědnou osobu</h2>
+            <p>
+     V případě jakýh koliv dotazů nás prosím kontaktujte na e-mailové adrese: mamproblem@seznam.cz nebo na telefoním číslo 604 674 000.
+            </p>
+        </div>
+     
+     
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "default.twig" %}
+{% block title %}me objednavky{% endblock %}
+
+{% block content %}
+    <div clas="objednavkypopis">
+        <h3>Info </h3>
+        <p>Nacházíte se v sekci pro zobrazení všech objednávek zákazníků, které máte na starost.
+        </p>
+
+        <h3> Me objednavky</h3>
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+
+                    <td><h4>Id stolu</h4></td>
+                    <td><h4>Polozka</h34</td>
+                    <td><h4>akce</h4></td>
+                    </h3>
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for ob in objednavky %}
+                    <tr>
+
+                        <td>{{ob.id_stul}}</td>
+                        <td>{{ob.menu_jednotlive_polozky_id_menu}}</td>
+
+                        <td>
+                            <a href="index.php?page=objednavky&smazat={{ob.id_obj}}">Smazat</a>
+                            </a></t>
+                    </tr>
+                {% endfor%}
+            </tbody>
+
+        </table>
+        <form class="col-md-5" action="" method="post">
+
+            <label for="objn[stul_id]" class="control-label">ID stolu</label>
+            <select name="objn[stul_id]">
+                {% for stul in stoly %}
+                    <option value="{{stul.id_stul}}">{{stul.id_stul}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label for="objn[menu_id]" class="control-label">Polozka</label>
+            <select name="objn[menu_id]">
+                {% for men in menu %}
+                    <option value="{{men.id_menu}}">{{men.nazev_polozky}}</option>
+                {% endfor %}
+            </select>
+            <br>
+             <label for="objn[cas]" class="control-label">cas</label>
+            <input type="time" name="objn[cas]">
+
+
+
+            <input class="btn btn-success btn-block" type="submit" name="newob" value="Přidat objednávku">
+
+        </form>
+
+    </div>
+{% endblock %}

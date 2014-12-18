@@ -1,0 +1,85 @@
+
+
+body{
+    background: sandybrown;
+     background-image: url("../obrazky/kuchar.jpg");
+     background-position-y: 730px; 
+     background-position-x: 1000px; 
+    background-repeat:no-repeat; 
+    color:darkred;
+
+}
+
+
+.navigace{
+    margin-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+    
+   background: darkred;
+}
+.bocni-menu{
+    padding-top: 15px;
+     background: #efeefe;
+    
+}
+
+
+.content{
+    padding-top: 10px;
+   
+     background-repeat:no-repeat;   
+
+}
+
+
+.table{
+
+   
+    background: peru;
+
+    color: darkred;
+
+}
+
+.container {
+    .navigace {
+       
+            color: red;
+        
+    }
+    
+    .bocni-menu col-md-4{
+  background: #262626;  
+}
+}
+
+.page-header{
+    height: 250px;
+    background-repeat:no-repeat; 
+    background-size: 100%;
+        background-image: url("../obrazky/hlavicka.gif");
+        background-repeat:no-repeat; 
+        
+
+   
+}
+#pata{
+    margin-top:160px;
+    padding-top:10px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    height: 100px;
+   
+    
+}
+.user-menu{
+    width: 100%;
+} 
+
+
+
+h1 {color: red; border: red}
+h2 {color: brown;}
+h4 {color: white;}
+h3 {color: saddlebrown;}
