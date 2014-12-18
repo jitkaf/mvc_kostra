@@ -36,23 +36,3 @@ if ($page == "uzivatele") {
 }
 
 
-
-/* pokud jsme na strance registrace, zjistime, jestli uzivatel odeslal formular pro registrace
-  pokud ano, do $d si ulozime data z formulare a snazime se zaregistrovat uzivatele.. */
-if ($page == "registrace") {
-
-    if (isset($_POST['registrace'])) {
-        $d = $_POST['reg'];
-
-        if ($d['heslo'] != $d['heslo2']) {
-            $_SESSION['hlaska'] = "Hesla se neshoduji";
-        } else if (false) {
-            //todo..nejsou prazdne pole
-        } else {
-            unset($d['heslo2']);
-            $model->registrujUzivatele($d);
-            $_SESSION['hlaska'] = "byl jste prihlasen";
-            header("Location: index.php");
-        }
-    }
-}

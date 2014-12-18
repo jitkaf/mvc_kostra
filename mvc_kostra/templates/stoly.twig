@@ -11,8 +11,8 @@
             <thead>
                 <tr>
                     <td><h4> Id stolu</h4></td>
-                    <td><h4>poctet osob</h4></td>
-                    <td><h4>Celkova utrata</h4></td>
+                    <td><h4>počet osob</h4></td>
+                    <td><h4>Celková útrata</h4></td>
                     <td><h4>akce</h4></td>
                 </tr>
 
@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{stul.id_stul}}</td>
                         <td>{{stul.pocet_osob}}</td>
-                        <td>664</td>
+                        <td>{{stul.id_stul*10 +stul.pocet_osob*2}}</td>  {#jedna se pouze o zkusebni data, skutecny vzorecek se nezdaril#}
                         <td>
                             <a href="index.php?page=stoly&smazat={{stul.id_stul}}">Smazat</a>
                          </td>

@@ -91,13 +91,13 @@
                     <h3> Menu</h3>
                     <ul class="nav nav-pills nav-stacked">
                         {% if user.prava == 1%}
-                            <li {% if page == "cisnici" %}class="active"{%endif%}><a href="index.php?page=cisnici">Cisnici</a> </li>
+                            <li {% if page == "cisnici" %}class="active"{%endif%}><a href="index.php?page=cisnici">Číšníci</a> </li>
                             
-                            <li {% if page == "meni" %}class="active"{%endif%}><a href="index.php?page=menu">Editovat jidelnicek</a></li>
+                            <li {% if page == "meni" %}class="active"{%endif%}><a href="index.php?page=menu">Editovat jídelníček</a></li>
 
                         {% endif %}
                         <li {% if page == "stoly" %}class="active"{%endif%}><a href="index.php?page=stoly">Moje stoly</a></li>
-                        <li {% if page == "objednavky" %}class="active"{%endif%}><a href="index.php?page=objednavky">Moje objednavky</a></li>
+                        <li {% if page == "objednavky" %}class="active"{%endif%}><a href="index.php?page=objednavky">Moje objednávky</a></li>
                         <li {% if page == "profil" %}class="active"{%endif%}><a href="index.php?page=profil">Profil</a></li>
                     </ul>
                 </div>
