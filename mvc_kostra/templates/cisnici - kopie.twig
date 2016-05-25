@@ -1,0 +1,98 @@
+{% extends "default.twig" %}
+{% block title %}Admin - Cisnici{% endblock %}
+
+{% block content %}
+
+
+    {% if novy or upravit %}
+
+        <form class="col-md-10" action="index.php" method="post">
+            <input type="hidden" name="cis[id_cis]" value="{{cisnak.id_cisnik}}"> 
+            <label for="cis[login]" class="control-label">Přihlašovací jméno</label>
+            <input value="{{cisnak.login}}" class="form-control" type="text" name="cis[login]">
+
+            <label for="cis[cisnik_jmeno]" class="control-label">Křestní jméno</label>
+            <input value="{{cisnak.cisnik_jmeno}}"class="form-control" type="text" name="cis[cisnik_jmeno]">
+
+            <label for="cis[cisnik_prijmeni]" class="control-label">Příjmení</label>
+            <input value="{{cisnak.cisnik_prijmeni}}"class="form-control" type="text" name="cis[cisnik_prijmeni]">
+
+            {#            {% if cisnak  null %}#}
+            <label for="cis[cisnik_datum_nastupu]" class="control-label">Datum</label>
+            <input value="{{cisnak.cisnik_datum_nastupu}}"class="form-control" type="date" name="cis[cisnik_datum_nastupu]">
+            {#            {% endif %}#}
+
+            <label for="cis[heslo]" class="control-label">Heslo</label>
+            <input class="form-control" type="password" name="cis[heslo]">
+
+            <label for="cis[cisnik_vykonnostni_trida]" class="control-label">Vykonostní třída</label>
+            <input value="{{cisnak.cisnik_vykonnostni_trida}}" class="form-control" type="number" name="cis[cisnik_vykonnostni_trida]">
+
+            {% if upravit %}
+                <input class="btn btn-success btn-block" type="submit" name="editci" value="Uprav cisnika">
+
+            {%else%}
+                
+                <input class="btn btn-success btn-block" type="submit" name="newci" value="Vytvor cisnika">
+              
+            {% endif%}
+        </form>
+    {%else%}
+        <a href="index.php?page=cisnici&action=novy">Nový číšník</a>
+
+
+        <table class=" table table-striped">
+            <thead>
+                <tr>
+                    <td><h4>Přihlašovací jméno</h4></td>
+                    <td><h4>Celé jméno</h4></td>
+                    <td><h4>Datum nástupu</h4></td>
+                    <td><h4>Platová třída</h4></td>
+                    <td><h4>Akce</h4></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cisnik in cisnici %}
+                    <tr>
+                        <td>{{cisnik.login}}</td>
+                        <td>{{cisnik.cisnik_jmeno}} {{cisnik.cisnik_prijmeni}}</td>
+                        <td>{{cisnik.cisnik_datum_nastupu|date('d.m.Y')}}</td>
+                        <td>{{cisnik.cisnik_vykonnostni_trida}}</td>
+                        <td>
+                            {% if cisnik.prava != 1%}
+                                <a href="index.php?page=cisnici&smazat={{cisnik.id_cisnik}}">Smazat</a> - 
+                            {%endif%}
+                            <a href="index.php?page=cisnici&upravit={{cisnik.id_cisnik}}">Upravit
+                            </a></td>
+                    </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <h2> Nápověda</h2>
+    <p>
+        Nacházíte se v modu pro editaci  číšníků - vašich zaměstnanců. Tato sekce je přístupná jen Vám, administrátorovi. Jako jediný máte práv
+        měnit jejich profily.
+    </p>
+
+    <h3>Vytvoření nového číšníka </h3>
+    <p> 
+        Pro zaregistrování nového uživatele klikněte na položku "Přidat číšníka". Po rozkliknutí odkazu budete přesměrováni na stránku 
+        registrace uživatele.
+    </p>
+
+    <h3> Editace číšníka</h3>
+    <p> 
+        Pokud chcete informace o daném číšníkovi upravit, například zvýšit jeho plat, rozklikněte udkaz "upravit" na stejném řádku
+        na kterém jsou napsané informace o tomto zaměstnanci.
+    </p>
+
+    <h3> Smazání číšníka</h3>
+    <p> 
+        Pokud chcete číšníka odstranit z databáze, klikněte na poličku "Smazat" na stejném řádku, na kterém jsou napsané informace o číšníkovi.
+        Pozor, tato změna je nevratná. Využívejte této funkce proto jen, pokud jste číšníka opravdu propustili. V případě nechtěného smazání
+        máte jeidnou možnost, přidat číšníka znovu. Všechna neuložená data budou ale ztracena.
+    </p>
+
+{% endblock %}
